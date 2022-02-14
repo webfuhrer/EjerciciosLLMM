@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function saludar()
+{
+  var edad =document.getElementById("edad").value;
+  var nombre=document.getElementById("nombre").value;
+  if (edad>17)
+  {
+    alert(nombre+" eres mayor de edad");
+
+  }
+  else
+  {
+    alert(nombre+" Eres menor de edad");
+  }
+}
+</script>
+</head>
+<body>
+
+
+  <input type="text" id="nombre" placeholder="Mete el nombre">
+
+
+<input type="number" id="edad" placeholder="Mete la edad">
+<button onclick="saludar();">SALUDAR</button>
+</body>
+</html>
