@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script>
+		function saludar()
+		{
+			let objeto_input=document.getElementById("campo_edad");
+			let edad=objeto_input.value;
+			if (edad<18)
+			{
+				alert("Eres menor de edad");
+			}
+			else
+			{
+				alert("Eres mayor de edad");
+			}
+		}
+	</script>
+</head>
+<body>
+<form action="procesa.php" method="POST">
+<input type="number" id="campo_edad" 
+placeholder="Pon tu edad">
+<input type="button" onclick="saludar();" value="ENVIAR">
+</form>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script>
+		function cambiarImgLink()
+		{
+			let objeto_select=document.getElementsByTagName("select")[0];
+			let obj_imagen=document.getElementsByTagName("img")[0];
+			let objeto_enlace=document.getElementsByTagName("a")[0];
+			let valor=objeto_select.value;
+			switch(valor)
+			{
+				case "PE":
+				obj_imagen.src="imagenes/perro.jpeg";
+				objeto_enlace.href="https://es.wikipedia.org/wiki/Canis_familiaris";
+				objeto_enlace.innerHTML="Ir a ágina de perros";
+				break;
+				case "PZ":
+				obj_imagen.src="imagenes/pez.jpeg";
+				objeto_enlace.href="https://es.wikipedia.org/wiki/Pez";
+				objeto_enlace.innerHTML="Ir a ágina de peces";
+				break;
+				case "GA":
+				obj_imagen.src="imagenes/gato.jpeg";
+				objeto_enlace.href="https://es.wikipedia.org/wiki/Felis_silvestris_catus";
+				objeto_enlace.innerHTML="Ir a ágina de gatos";
+				break;
+				default:
+				obj_imagen.src="";
+				break;
+					
+			}
+		}
+	</script>
+</head>
+<body>
+<form action="procesa.php" method="POST">
+	<select onchange="cambiarImgLink();">
+		<option value="0" selected>Seleccione una opción</option>
+		<option value="PE">Perro</option>
+		<option value="GA">Gato</option>
+		<option value="PZ">Pez</option>
+	</select>
+	<img src="">
+	<br>
+	<a href="">Clica aquí</a>
+</form>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script>
+		function saludar()
+		{
+			let objeto_input=document.getElementById("campo_nombre");
+			let email=objeto_input.value;
+			//ddecevefv@gmail.com y @hotmail.com
+			let parametros=email.split("@"); 
+			console.log("Hola");
+			if (parametros[1]=="yopmail.com")
+			{
+				alert("No te dejo con ese email");
+			}
+			else
+			{
+				//submit
+			}
+		}
+	</script>
+</head>
+<body>
+<form action="procesa.php" method="POST">
+<input type="email" id="campo_nombre" 
+placeholder="Pon tu email (minimo 8 letras)">
+<input type="button" onclick="saludar();" value="ENVIAR">
+</form>
+</body>
+</html>
