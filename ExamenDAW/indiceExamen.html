@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--Siguiendo est ejemplo, crea ua aplicación con un texto rojo y que al clicar el botón se ponga verde y así alternativamente-->
+  <title>Investigación</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="js/funciones.js"></script>
+<style>
+  .oculto
+  {
+    display:  none;
+  }
+  .mostrado
+  {
+    display:  block;
+  }
+</style>
+</head>
+<body>
+<input type="text" placeholder="Pon el nombre" id="nombre">
+Número de adultos:
+<select>
+  <option value="0">0</option>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+</select>
+Número de NIÑOS:
+<select id="num_ninios" onchange="mostrarCamposEdades();">
+  <option value="0">0</option>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+</select>
+<input type="number" class="oculto" placeholder="Intruduce le edad del primer niño">
+<input type="number" class="oculto" placeholder="Intruduce le edad del segundo niño">
+<input type="number" class="oculto" placeholder="Intruduce le edad del tercer niño">
+<input type="number" class="oculto" placeholder="Intruduce le edad del cuarto niño">
+<input type="button" onclick="validar();" value="ENVIAR">
+</body>
+</html>
