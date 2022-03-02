@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>EXAMEN TURNO A</title>
+  <meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″ />
+  <script src="js/funciones.js"> </script>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <div></div>
+<h2 onclick="ocultarMostrar(1);">Datos personales</h2>
+<div>
+	<p>NOMBRE: Pepe Pérez</p>
+	<p>DIRECCIÓN: Calle Pez</p>
+	<p>TELÉFONO: 666-666-666</p>
+</div>
+<h2  onclick="ocultarMostrar(2);">Experiencia</h2>
+<div>
+  <p>
+  Hago unas tortillas de campeonato. También sé programar.
+  </p>
+</div>
+<h2  onclick="ocultarMostrar(3);">Formación</h2>
+<div>
+  <p>
+  Máster en batido de huevo. Técnico de tortillas
+  </p>
+</div>
+
+<h2 onclick="ocultarMostrar(4);">Contacto</h2>
+<div id="formulario">
+  <p>Para contactar conmigo y que tye haga un programa o una tortilla, rellena el formulario:</p>
+  <input type="text" placeholder="Introduce tu nombre">
+  <input type="email" placeholder="Introduce tu email">
+  <input type="button" value="ENVIAR" onclick="validar();">
+</div>
+</body>
+
+</html>

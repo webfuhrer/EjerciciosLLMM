@@ -1,0 +1,19 @@
+div{
+	display: none;
+}
+h2{
+	cursor: pointer;
+}
+@media print
+{
+	div{
+	display: block;
+	}
+	#formulario
+	{
+		display: none;
+	}
+	h2~h2~h2~h2{
+		display: none;
+	}
+}
