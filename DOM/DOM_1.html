@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script>
+		var id=0;
+		function aniadirProducto()
+		{
+
+		var objeto_lista=document.createElement("li");
+		objeto_lista.innerHTML=document.getElementsByTagName("input")[0].value;
+		objeto_lista.style.cursor="pointer";
+		objeto_lista.id="elemento"+id;
+		id=id+1;
+		//objeto_lista.onclick=clicado;
+		objeto_lista.onclick=function(){clicado(this);}
+		/*
+		Al clicar el elemento de lista, se borre
+		*/
+		var lista=document.getElementsByTagName("ul")[0];
+		lista.appendChild(objeto_lista);
+		}
+		function clicado(n)
+		{
+			
+			var lista=document.getElementsByTagName("ul")[0];
+			lista.removeChild(n);
+			alert("Has clicado en: "+n.innerHTML);
+		}
+	
+	</script>
+</head>
+<body>
+	<input type="text" placeholder="Mete elemento para comprar">
+	<ul>
+
+	</ul>
+<input type="button" onclick="aniadirProducto();" value="Clicar">
+</body>
+</html>

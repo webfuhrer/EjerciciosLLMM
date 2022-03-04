@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script>
+		var id=0;
+		function ponerOyenteAlBoton()
+		{
+			document.getElementsByTagName("input")[1].onclick=function(){cambiarTexto(this);}
+		}
+		function cambiarTexto(obj_boton)
+		{
+			alert(obj_boton);
+			obj_boton.value="Me has clicado";
+		}
+	
+	</script>
+</head>
+<body onload="ponerOyenteAlBoton()">
+	<input type="text" placeholder="Mete elemento para comprar">
+	<ul>
+
+	</ul>
+<input type="button" value="Clicar">
+</body>
+</html>
