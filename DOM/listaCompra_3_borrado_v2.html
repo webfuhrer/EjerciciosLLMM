@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script>
+		var id=0;
+		function aniadirProducto()
+		{
+			
+			var objeto_li=document.createElement("li");
+			var producto=document.getElementsByTagName("input")[0].value;
+			objeto_li.innerHTML=producto;
+			document.getElementsByTagName("input")[0].value="";
+			document.getElementsByTagName("ul")[0].appendChild(objeto_li);
+			
+			
+		}
+		function borrarElemento(x)//Se puiede llamar tb objeto_li ;-)
+		{
+			document.getElementsByTagName("ul")[0].removeChild(x);
+		}
+		function borrarProducto()
+		{
+			var producto_borrar=document.getElementsByTagName("input")[0].value;
+			//Cogero todos los li y ver qué ponen:
+			var elementos_li=document.getElementsByTagName("li");
+			for(i=0; i<elementos_li.length; i++)
+			{
+				 if(elementos_li[i].innerHTML==producto_borrar)
+				 {
+				 	borrarElemento(elementos_li[i]);
+				 }
+			}
+
+		}
+	</script>
+</head>
+<body>
+	<input type="text" placeholder="Mete elemento para comprar">
+	<ul>
+
+	</ul>
+<input type="button" onclick="aniadirProducto();" value="AÑADIR">
+<input type="button" onclick="borrarProducto();" value="BORRAR">
+</body>
+</html>

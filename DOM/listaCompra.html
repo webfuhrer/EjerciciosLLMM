@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script>
+		var id=0;
+		function aniadirProducto()
+		{
+			var num_elementos_lista=document.getElementsByTagName("li").length;
+
+			if(num_elementos_lista<3)
+			{
+			var objeto_li=document.createElement("li");
+			document.getElementsByTagName("ul")[0].appendChild(objeto_li);
+			}
+			else
+			{
+				alert("Olvídame");
+			}
+		}
+	
+	</script>
+</head>
+<body>
+	<input type="text" placeholder="Mete elemento para comprar">
+	<ul>
+
+	</ul>
+<input type="button" onclick="aniadirProducto();" value="Clicar">
+</body>
+</html>

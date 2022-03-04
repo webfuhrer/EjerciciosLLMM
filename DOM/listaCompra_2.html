@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script>
+		var id=0;
+		function aniadirProducto()
+		{
+			var num_elementos_lista=document.getElementsByTagName("li").length;
+			var objeto_li=document.createElement("li");
+			objeto_li.style.color="red";
+			var producto=document.getElementsByTagName("input")[0].value;
+			objeto_li.innerHTML=producto;
+			document.getElementsByTagName("input")[0].value="";
+			document.getElementsByTagName("ul")[0].appendChild(objeto_li);
+			
+			
+		}
+	
+	</script>
+</head>
+<body>
+	<input type="text" placeholder="Mete elemento para comprar">
+	<ul>
+
+	</ul>
+<input type="button" onclick="aniadirProducto();" value="Clicar">
+</body>
+</html>

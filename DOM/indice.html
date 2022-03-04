@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>EXAMEN TURNO A</title>
+  <meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8″ />
+  <script>
+function validar()
+{
+  var valor_email=document.getElementsByTagName("input")[1].value;
+  //1-El doctorsito (un contador que iba aumentando)
+  //2-Variedad del doctorsito (usando variable booleana)
+  /*var tiene_arroba=false; 
+  for(i=0; i<valor_email.length; i=i+1)
+  {
+    //pepe@mail.com
+    if(valor_email[i]=="@")
+    {
+      tiene_arroba=true;
+    }
+
+  }
+  if(tiene_arroba==false)
+  {
+    //No tiene arroba
+    alert("No tiene arroba");
+  }else{
+    alert("Sí tiene arroba");
+  }
+*/
+//3-Usando el split("@")
+/*var array_email=valor_email.split("@");
+  if (array_email.length>1)//Hay arroba/-s
+  {
+    alert("Hay arroba/-s");
+  }
+  else
+  {
+    alert("No hay arrobas");
+  }
+}*/
+//4-Usando una expresión regular
+
+
+if(valor_email.match(new RegExp('@{1,}')))
+{
+ alert("Tiene arroba");
+}
+else
+{
+  alert("NO Tiene arroba");
+}
+}
+    </script>
+</head>
+<body>
+  <div></div>
+<h2 onclick="ocultarMostrar(1);">Datos personales</h2>
+<div>
+	<p>NOMBRE: Pepe Pérez</p>
+	<p>DIRECCIÓN: Calle Pez</p>
+	<p>TELÉFONO: 666-666-666</p>
+</div>
+<h2  onclick="ocultarMostrar(2);">Experiencia</h2>
+<div>
+  <p>
+  Hago unas tortillas de campeonato. También sé programar.
+  </p>
+</div>
+<h2  onclick="ocultarMostrar(3);">Formación</h2>
+<div>
+  <p>
+  Máster en batido de huevo. Técnico de tortillas
+  </p>
+</div>
+
+<h2 onclick="ocultarMostrar(4);">Contacto</h2>
+<div id="formulario">
+  <p>Para contactar conmigo y que tye haga un programa o una tortilla, rellena el formulario:</p>
+  <input type="text" placeholder="Introduce tu nombre">
+  <input type="email" placeholder="Introduce tu email">
+  <input type="button" value="ENVIAR" onclick="validar();">
+</div>
+</body>
+
+</html>
