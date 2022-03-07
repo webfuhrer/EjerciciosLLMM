@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script>
+	var lista_cientificas=["Margarita Salas", "Marie Curie", "Ada Lovelace", "Hedy Lamarr"];	
+	function cargaOpciones()
+	{
+		var  objeto_select=document.createElement("select");
+		objeto_select.id="mujeres";
+		objeto_select.onchange=function(){
+			saludar();
+		}
+		document.body.appendChild(objeto_select);
+		var obj_option_seleccione_opcion=document.createElement("option");
+		obj_option_seleccione_opcion.value=-1;
+	
+		obj_option_seleccione_opcion.innerHTML="Seleccione una opción";
+		objeto_select.appendChild(obj_option_seleccione_opcion);
+		for (i=0; i<lista_cientificas.length; i++)
+		{
+			var obj_option=document.createElement("option");
+			// obj_option.value="opcion_"+i;
+			obj_option.value=i;
+			obj_option.innerHTML=lista_cientificas[i];
+			objeto_select.appendChild(obj_option);
+		}
+		
+	}
+	
+	function saludar()
+	{
+		var objeto_select=document.getElementById("mujeres");
+		// opcion_0 split("_");
+		//var indice=objeto_select.value.split("_");
+		var indice=objeto_select.value;
+		//var num=indice[1];
+		var num=indice;
+		if(num>-1){
+		alert("Has seleccionado a "+lista_cientificas[num]);
+		}
+	}
+	</script>
+</head>
+<body onload="cargaOpciones();">
+	
+
+</body>
+</html>
