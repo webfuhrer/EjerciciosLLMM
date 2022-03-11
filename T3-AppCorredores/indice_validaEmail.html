@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script>
+		function validar()
+		{
+			var email=document.getElementsByTagName("input")[0].value;
+			if(ValidateEmail(email))
+			{
+				//El email es válido
+			}
+			else
+			{
+				//El email no es válido
+			}
+		}
+		function ValidateEmail(mail) 
+		{
+		 if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
+		  {
+		    return (true)
+		  }
+		    
+		    return (false)
+		}
+	</script>
+</head>
+<body>
+	<input type="email" id="email" onblur="validar();">
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script>
+		/*function validarNombre()
+		{
+			var nombre=document.getElementById("nombre").value;
+
+		}*/
+		/*function validarNombre(obj_input)
+		{
+			var nombre=obj_input.value;
+
+		}*/
+		function validarNombre(nombre)
+		{
+			
+			if(nombre.length<4)
+			{
+				alert("El campo debe tener al menos 4 caracteres");
+			}
+		}
+		function validarEmail(mail) 
+			{
+			 if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
+			  {
+
+			    return (true)
+			  }
+			    alert("El email es incorrecto")
+			    return (false)
+			}
+			function haCorrido()
+			{
+				//Voy a comprobar que no haya campos.
+				//Formas:
+				//1-Velo si existe el id distancia
+				if (document.getElementById("distancia")!=null)
+				{
+					//Ya tengo el campo. Noi hago nada
+				}
+				else
+				{
+					//No existe el campo, así qu lo creo
+				var obj_distancia=document.createElement("input");
+				obj_distancia.id="distancia";
+				obj_distancia.type="number";
+				document.getElementById("campo_corredor").appendChild(obj_distancia);
+				}
+			}
+			function noHaCorrido()
+			{
+				//Tengo que borrar el campo de id=distancia
+				//padre.removeChild(...)
+				if (document.getElementById("distancia")!=null)
+				{
+				document.getElementById("campo_corredor").removeChild(document.getElementById("distancia"));
+				}
+			}
+		</script>
+</head>
+<body>
+	<form>
+		<input type="text" id="nombre" placeholder="Pon tu nombre. Mínimo 4 caracteres" onblur="validarNombre(this.value);">
+		<input type="email" id="email" placeholder="Pon tu email. " onblur="validarEmail(this.value);">
+		<br>
+		<input type="radio" name="hacorrido" value="SI" onclick="haCorrido();">SI<br>
+		<input type="radio" name="hacorrido" value="NO" onclick="noHaCorrido();">NO<br>
+		<div id="campo_corredor"></div>
+	</form>
+</body>
+</html>
