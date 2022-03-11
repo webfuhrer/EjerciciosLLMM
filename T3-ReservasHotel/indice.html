@@ -1,0 +1,28 @@
+<!Doctype html>
+<html>	
+<head>
+	<title>Brooking.com</title>
+	<script src="js/funciones.js"></script>
+
+</head>
+<body>
+Seleccione el número de adultos:
+<select id="num_adultos" onchange="crearCamposNombres(this.value);">
+	<option value="1">Uno</option>
+	<option value="2">Dos</option>
+	<option value="3">Tres</option>
+	<option value="4">Cuatro</option>
+</select>	
+<br>
+Seleccione el número de niños:
+<select id="num_ninios" onchange="crearCamposEdades();">
+	<option value="1">Uno</option>
+	<option value="2">Dos</option>
+	<option value="3">Tres</option>
+	<option value="4">Cuatro</option>
+</select>
+<div id="campos_nombres"></div>
+<div id="campos_edades"></div>
+<input type="button" value="Enviar" onclick="validar();">
+</body>
+</html>
