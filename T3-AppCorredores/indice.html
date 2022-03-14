@@ -57,6 +57,23 @@
 				document.getElementById("campo_corredor").removeChild(document.getElementById("distancia"));
 				}
 			}
+			function indicarDatos()
+			{
+				var nombre=document.getElementById("nombre").value;
+				var email=document.getElementById("email").value;
+				var saludo="Te llamas "+nombre+" tienes email: "+email;
+				//Si ha coorido antes, le pongo más texto al alert(la variable saludo)
+				//Opción 1, mirando el id de la opción SI:
+				//var hacorrido=document.getElementById("sihacorrido").checked;
+				var r_buttons=document.getElementsByName("hacorrido");
+				var hacorrido=r_buttons[0].checked;
+				if (hacorrido)
+				{
+					var distancia=document.getElementById("distancia").value;
+					saludo=saludo+" y has corrido distancia de "+distancia+" km";
+				}
+				alert(saludo);
+			}
 		</script>
 </head>
 <body>
@@ -64,9 +81,10 @@
 		<input type="text" id="nombre" placeholder="Pon tu nombre. Mínimo 4 caracteres" onblur="validarNombre(this.value);">
 		<input type="email" id="email" placeholder="Pon tu email. " onblur="validarEmail(this.value);">
 		<br>
-		<input type="radio" name="hacorrido" value="SI" onclick="haCorrido();">SI<br>
-		<input type="radio" name="hacorrido" value="NO" onclick="noHaCorrido();">NO<br>
+		<input type="radio" id="sihacorrido" name="hacorrido" value="SI" onclick="haCorrido();">SI<br>
+		<input type="radio" name="hacorrido" value="NO" onclick="noHaCorrido();" checked>NO<br>
 		<div id="campo_corredor"></div>
+		<input type="button" onclick="indicarDatos()" value="Enviar">
 	</form>
 </body>
 </html>
