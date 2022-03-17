@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>T3-AgendaTabla</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+<script>
+var velocidad=5;
+/*
+La imagen tiene position absolute. con top y left la hago estar a una distancia 
+top del borde superior(top) y una distancia del borde izquierdo(left).
+Variaré esos valore para moverla. Además, con el transform la rotaré para que mire hacia donde va
+*/
+function moverArriba()
+    {
+        var top=window.getComputedStyle(document.getElementById("nave")).top;
+		//Tengo queusar window.getComputedStyle porque el estilo se lo estoy dando con 
+		//css. Si hubiera puesto top y left dentro de la propia etiqueta, 
+		//podría acceder con document.document.getElementById("nave").style.top
+        var nuevo_top=(top.substring(0, top.length-2)-velocidad)+"px";
+		// ^ Lo del substring es porque la propiedad top es "Xpx", donde X es el número. De
+			//forma que tengo que separar lo de px para poder operar con X
+        document.getElementById("nave").style.top=nuevo_top;
+        document.getElementById("nave").style.transform = "rotate(0deg)";
+    }
+    function moverAbajo()
+    {
+        var top=window.getComputedStyle(document.getElementById("nave")).top;
+        var nuevo_top=(1*top.substring(0, top.length-2)+velocidad)+"px";
+        document.getElementById("nave").style.top=nuevo_top;
+        document.getElementById("nave").style.transform = "rotate(180deg)";
+    }
+      function moverDerecha()
+    {
+        var left=window.getComputedStyle(document.getElementById("nave")).left;
+        var nuevo_left=(1*left.substring(0, left.length-2)+velocidad)+"px";
+		// ^ Lo del substring es porque la propiedad top es "Xpx", donde X es el número. De
+			//forma que tengo que separar lo de px para poder operar con X
+			//Además, como hay un símbolo + Javascript lo intentará concatenar. Para decirle
+			//que es un número, hacemos el truco de "multiplicar por 1".
+        document.getElementById("nave").style.left=nuevo_left;
+        document.getElementById("nave").style.transform = "rotate(90deg)";
+    }
+      function moverIzquierda()
+    {
+        var left=window.getComputedStyle(document.getElementById("nave")).left;
+        var nuevo_left=(1*left.substring(0, left.length-2)-velocidad)+"px";
+        document.getElementById("nave").style.left=nuevo_left;
+        document.getElementById("nave").style.transform = "rotate(-90deg)";
+    }
+</script>
+<style>
+    .tabla{
+        border: 2px solid blue;
+    }
+    #nave
+    {
+        width: 5%;
+        position: absolute;
+        left:40%;
+        top:40%;
+    }
+    .contenedor_botones
+    {
+        width: 20%;
+        background-color: gray;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+	<img id="nave" src="imagenes/nave.png">
+    <br>
+    <div class="contenedor_botones">
+        <input type="button" onclick="moverArriba();" value="^">
+            <br>
+        <input type="button" onclick="moverIzquierda();" value="<-">
+        <input type="button" onclick="moverDerecha();" value="->">
+        <br>
+            <input type="button" onclick="moverAbajo();" value="&#709;">
+    </div>
+    <br>     
+</body>
+</html>
