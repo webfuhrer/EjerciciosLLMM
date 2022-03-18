@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function hacerBusqueda()
+{
+	//var valor_select=document.getElementById("buscador").value;
+	var valor_select=document.getElementsByTagName("select")[0].value;
+	var formulario=document.forms[0];
+	switch(valor_select)
+	{
+		case "G":
+		formulario.action="https://www.google.com/search";
+		break;
+		case "Y":
+		formulario.action="https://es.search.yahoo.com/search";
+		break;
+
+	}
+	//var formulario=document.getElementsByTagName("form")[0];
+	if (document.getElementById("campo_busqueda").value!="")
+	{
+		formulario.submit();
+	}
+	else
+	{
+		alert("Por favor, rellene el campo");
+		document.getElementById("campo_busqueda").focus();
+	}
+	
+
+}
+</script>
+</head>
+<body>
+	<form method="GET">
+		<select name="seleccionador" id="buscador">
+			<option value="G">Google</option>
+			<option value="Y">Yahoo</option>
+		</select>
+		<input type="text" name="q" id="campo_busqueda" placeholder="Introduce la palabra a buscar">
+		<input type="button" value="ENVIAR" onclick="hacerBusqueda();">
+	</form>
+
+</body>
+</html>
