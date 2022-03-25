@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>El primer AJAX</title>
+	<script>
+	function llamarAJAX() 
+	 {
+	 	var obj_ajax=new XMLHttpRequest();
+	 	obj_ajax.onreadystatechange=function()
+	 	{
+	 		console.log("El readyState vale: "+obj_ajax.readyState);
+	 		if (obj_ajax.readyState==4 &&  obj_ajax.status==200)
+	 		{
+	 			/*alert("Llegaron los datos: "+obj_ajax.responseText);*/
+	 			//alert(obj_ajax.status);
+	 			document.getElementById("contenido").innerHTML=obj_ajax.responseText;
+	 		}
+	 	}
+	 	obj_ajax.open("GET", "archivo_ajax.txt");
+	 	//readyState
+	 	obj_ajax.send();
+	 	
+	 	
+	 }
+	</script>
+</head>
+<body>
+<div id="contenido"></div>
+
+<input type="button" onclick="llamarAJAX();">
+
+</body>
+</html>
+
