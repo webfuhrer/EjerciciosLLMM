@@ -1,0 +1,38 @@
+
+ <!DOCTYPE html>
+<html>
+<head>
+    <script>
+    function cargarNombres() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+    var parser = new DOMParser();
+    var objeto_html = parser.parseFromString(this.responseText,"text/html");
+    var imagenes=objeto_html.getElementsByTagName("img");
+
+    for (i=0; i<imagenes.length; i++)
+           {
+            if(imagenes[i].src!="")
+                {
+                    var img=document.createElement("img");
+                    img.src=imagenes[i].src;
+                    document.getElementById("demo").appendChild(img);
+                }
+
+            }
+    }
+  };
+  xhttp.open("GET", "https://www.elmundo.es/", true);
+  xhttp.send();
+}
+    </script>
+</head>
+<body  onload="cargarNombres()">
+
+<div id="demo">
+  
+</div>
+
+</body>
+</html>
