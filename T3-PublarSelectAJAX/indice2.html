@@ -1,0 +1,40 @@
+<html>
+<head>
+<script>
+function cargarDesplegable()
+	{
+		var objeto_peticion=new XMLHttpRequest();
+		var lista_conciertos="";
+
+		objeto_peticion.onreadystatechange=function()
+		{
+
+			if(objeto_peticion.readyState==4 && objeto_peticion.status==200)
+			{
+				//Ya hay respuesta y todo está bien
+				var respuesta=objeto_peticion.responseText;
+				lista_conciertos=respuesta.split(",");
+				var obj_select=document.createElement("select");
+				for(i=0; i<lista_conciertos.length; i++)
+					 {
+					 var obj_option=document.createElement("option");
+					 obj_option.innerHTML=lista_conciertos[i];
+					 obj_select.appendChild(obj_option);
+					 }
+				document.getElementsByTagName("body")[0].appendChild(obj_select);
+
+			}
+
+		}
+		objeto_peticion.open("GET", "nombres.txt");
+		objeto_peticion.send();
+
+
+			
+	}
+</script>
+</head>
+<body onload="cargarDesplegable();">
+
+</body>
+</html>
