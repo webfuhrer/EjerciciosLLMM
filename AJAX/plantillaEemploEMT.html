@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"> 
+	<title>Prueba de formulario</title>
+	<script>
+	function cargarContenidoAJAX()
+	{
+	var obj_peticion=new XMLHttpRequest();
+	obj_peticion.onload=function()
+		{
+		//Ya tengo la respuesta. Hago lo que sea...
+		//alert(obj_peticion.responseText);
+		document.getElementById("contenedor").innerHTML=obj_peticion.responseText;
+		
+		}
+	obj_peticion.open("get", "https://openapi.emtmadrid.es/v1/mobilitylabs/user/login/", true);
+	
+	/*
+	DESCOMENTAR
+	obj_peticion.setRequestHeader("email", EMAIL);
+	obj_peticion.setRequestHeader("password", PWD);*/
+	obj_peticion.send();
+	console.log(obj_peticion);
+
+	
+	
+	
+	}
+
+	</script>
+</head>
+<body>
+	<div id="contenedor"></div>
+	<input type="button" onclick="cargarContenidoAJAX()"
+	value="Mostrar">
+	
+</form>
+</body>
+</html>
