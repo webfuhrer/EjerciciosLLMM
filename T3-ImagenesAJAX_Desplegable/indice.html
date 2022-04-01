@@ -1,0 +1,65 @@
+<html>
+<head>
+<script>
+	function cargarDesplegable()
+	{
+		var a="Pepe";
+		var xhr=new XMLHttpRequest();
+		xhr.onreadystatechange=function()
+		{
+			//readyState
+			//status =200 OK
+			if(xhr.readyState==4 && xhr.status==200)
+			{
+				//Tengo la respuesta completa (xq el readyState es 4)
+				//Además la respuesta es correcta (status es 200)
+				var linea_rutas=xhr.responseText;
+				var lista_rutas=linea_rutas.split(",");
+				var objeto_select=document.createElement("select");
+				objeto_select.onchange=cambiarImagen;
+				for(i=0; i<lista_rutas.length; i++)
+				{
+					var obj_option=document.createElement("option");
+					obj_option.value=lista_rutas[i];
+					obj_option.innerHTML="Imagen "+(i+1);
+					objeto_select.appendChild(obj_option);
+
+				}
+				//document.getElementsByTagName("body")[0];
+				document.body.appendChild(objeto_select);
+
+
+
+			}
+
+		}
+		xhr.open("GET", "rutas_imagenes.txt");
+		xhr.send();
+
+	}
+	function cambiarImagen()
+	{
+		//A ver si existe lqa imagen
+		var imagen=document.getElementById("imagen");
+		if(imagen==null)
+		{
+			//No existe la imagen así que la creo
+			var obj_imagen=document.createElement("img");
+		obj_imagen.id="imagen";
+		var ruta_imagen=document.getElementsByTagName("select")[0].value;
+		obj_imagen.src=ruta_imagen;
+		document.body.appendChild(obj_imagen);
+		}
+		else
+		{
+			imagen.src=document.getElementsByTagName("select")[0].value;		}
+		
+		
+		}
+
+</script>
+</head>
+<body onload="cargarDesplegable();">
+
+</body>
+</html>
