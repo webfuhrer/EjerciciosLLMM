@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ejemplo AJAX</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="js/funciones.js"></script>
+
+<script>
+function pedirDatos()
+{
+	var obj_peticion=new XMLHttpRequest();
+	//readyState
+	obj_peticion.onreadystatechange=function()
+	{
+		if(obj_peticion.readyState==4 && obj_peticion.status==200)
+		{
+			document.getElementById("contenedor").innerHTML=obj_peticion.responseText;
+		}
+		else if(obj_peticion.status==404)
+		{
+			document.getElementById("contenedor").innerHTML="ALGO HA IDO MAL"
+		}
+
+		//readyState  status
+		console.log("readyState: "+obj_peticion.readyState);
+		console.log("status: "+obj_peticion.status);
+	}
+	/*obj_peticion.onload=function()
+		{
+			/// obj_peticion.responseText
+			alert(obj_peticion.responseText);
+		}*/
+	obj_peticion.open("GET", "texto_aRGBGjax.txt");
+	obj_peticion.send();
+
+
+}
+</script>
+
+</head>
+<body >
+	<div id="contenedor"></div>
+		<input type="button" onclick="pedirDatos();" value="Pedir datos">
+</body>
+</html>
