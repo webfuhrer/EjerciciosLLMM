@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<libreria>
+  <libro>
+    <titulo>
+      El qUIjote
+    </titulo><autor>Cervantes</autor></libro>
+   <libro>
+    <titulo>La Celestina</titulo>
+    <autor>Fdo de Rojas</autor>
+  </libro>
+</libreria>
+
