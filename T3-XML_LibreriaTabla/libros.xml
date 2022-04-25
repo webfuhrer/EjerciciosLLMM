@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<biblioteca>
+	<libro>
+		<autor>Cervantes</autor>
+		<titulo>El Quijote</titulo>
+	</libro>
+	<libro>
+		<autor>Kennedy O Toole</autor>
+		<titulo>La conjura de los necios</titulo>
+	</libro>
+	<libro>
+		<autor>No recuerdo</autor>
+		<titulo>El antroṕólogo inocente</titulo>
+	</libro>
+</biblioteca>

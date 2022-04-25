@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Imagenes AJAX</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script>
+function insertarLibros()
+	{
+	var objeto_peticion=new XMLHttpRequest();
+	objeto_peticion.onreadystatechange=function()
+		{
+			if (objeto_peticion.status==200 && objeto_peticion.readyState==4)
+			{
+				//TODO
+				pintarTabla(objeto_peticion.responseXML);
+
+			}
+		}
+objeto_peticion.open("GET", "libros.xml");
+objeto_peticion.send();
+		//readyState
+		//status
+
+		//responseText
+		//responseXML
+	}
+	function pintarTabla(xml)
+	{
+		//Suponemos que cada libro tiene
+		//solo un autor y solo un título
+		var arr_autores=xml.getElementsByTagName("autor");
+		var arr_titulos=xml.getElementsByTagName("titulo");
+		var obj_tabla=document.createElement("table");
+		for(i=0; i<arr_autores.length;i++ )
+		{
+			var objeto_fila=document.createElement("tr");
+			var objeto_celda_autor=document.createElement("td");
+			var objeto_celda_titulo=document.createElement("td");
+			var nombre_autor=arr_autores[i].childNodes[0].nodeValue;
+			var titulo_libro=arr_titulos[i].childNodes[0].nodeValue;
+	objeto_celda_autor.innerHTML=nombre_autor;
+	objeto_celda_titulo.innerHTML=titulo_libro;
+			objeto_fila.appendChild(objeto_celda_autor);
+			objeto_fila.appendChild(objeto_celda_titulo);
+			obj_tabla.appendChild(objeto_fila);
+			document.getElementById("contenedor_tabla").appendChild(obj_tabla);
+}
+}
+</script>
+
+</head>
+<body onload="insertarLibros();">
+	<div id="contenedor_tabla"></div>
+</body>
+</html>
