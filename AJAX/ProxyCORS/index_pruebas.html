@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"> 
+	<title>Prueba de formulario</title>
+	<script>
+	//ruta es la URL de la que quiero obtener el XML o el JSON, pero que no tiene el "Allow-Origin
+	 //la cabecera "Access-Control-Allow-Origin", y, salta al error:
+//"Access to XMLHttpRequest at 'https://www.mambiente.madrid.es/opendata/meteorologia.xml' from origin 
+//'http://localhost' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on //the requested resource."
+//La política de CORS "solo" afecta cuando se expone el Javascript, por el potencial riesgo, de forma 
+//que la petición real la gace un script en php, al que le paso la ruta que me interesa y él hace de proxy
+	var ruta="http://www.aemet.es/xml/municipios/localidad_28092.xml";
+	var ruta_local="index2.php?ruta="+ruta;
+	function cargarContenidoAJAX()
+	{
+
+	var obj_peticion=new XMLHttpRequest();
+	obj_peticion.onload=function()
+		{
+		
+		//No tengo responseXML porque el PHP no mete cabeceras
+		var xml=obj_peticion.responseXML;
+		/*
+		Si en php no hubiera metido el header, necesitaría "convertir" el texto en XML
+		var parser = new DOMParser();
+		var xmlDoc = parser.parseFromString(obj_peticion.responseText,"text/xml");*/
+		tratarTiempo(xml);
+		
+		//alert(obj_peticion.responseText);
+		}
+	obj_peticion.open("get", ruta_local, true);
+	obj_peticion.send();
+	}
+	function tratarTiempo(obj_xml)
+	{
+	var dias=obj_xml.getElementsByTagName("dia");
+	
+	for (i=0; i<dias.length; i++)
+		{
+		var temperatura_maxima=dias[i].getElementsByTagName("temperatura")[0].getElementsByTagName("maxima")[0].childNodes[0].nodeValue;
+		var temperatura_minima=dias[i].getElementsByTagName("temperatura")[0].getElementsByTagName("minima")[0].childNodes[0].nodeValue;
+		var fecha=dias[i].getAttribute("fecha");
+		console.log("DIA: "+fecha+" MÁXIMA: "+temperatura_maxima+" MÍNIMA: "+temperatura_minima);
+		}
+	
+	
+	}
+
+	</script>
+</head>
+<body>
+	<div id="contenedor"></div>
+	<input type="button" onclick="cargarContenidoAJAX()"
+	value="Mostrar">
+	
+</form>
+</body>
+</html>
