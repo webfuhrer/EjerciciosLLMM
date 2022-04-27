@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function cargarLibros()
+        {
+            var xhr=new XMLHttpRequest();
+            //readyState
+            //status
+            //responseText
+            xhr.onreadystatechange=function()
+                {
+                    if(xhr.readyState==4 && xhr.status==200)
+                    {
+                        //Ya tengo los datos
+                        var obj_xml=xhr.responseXML;
+                        tratarXML(obj_xml);
+
+                    }   
+
+                }
+            xhr.open("GET", "books.xml");
+            xhr.send();
+
+        }
+        function tratarXML(xml)
+        {
+    
+    var lista_libros=xml.getElementsByTagName("libro");
+    const libreria=[];
+    for (indice_libros=0; indice_libros<lista_libros.length; indice_libros++)
+            {
+                
+                var obj_libro=lista_libros[indice_libros];
+                var titulo=obj_libro.getElementsByTagName("titulo")[0].childNodes[0].nodeValue;
+                var objetos_autor=obj_libro.getElementsByTagName("autor");
+                libreria[indice_libros]=new Object();
+                libreria[indice_libros].titulo=titulo;  
+               
+                /*var objeto={nombre: "Marta", apellido: "Perez", aficiones: ["leer", "caminar"]}*/
+                /*libreria=[{titulo: "Don QUijote", autores: "Cervantes"},
+                    {titulo:"La Celestina", autores: "Fde de Rojas, Pepe Perez"}]*/
+                var texto_autores="";
+                for(indice_autor=0; indice_autor<objetos_autor.length; indice_autor++)
+                {
+                   var nombre_autor=objetos_autor[indice_autor].childNodes[0].nodeValue;
+                   texto_autores=texto_autores+", "+nombre_autor;
+                }
+                libreria[indice_libros].autores=texto_autores;
+                
+            } 
+            
+            crearTabla(libreria);
+
+       }
+       function crearTabla(lista_obj_libro)
+       {
+        var tabla=document.createElement("table");
+
+            for (i=0; i<lista_obj_libro.length; i++)
+            {
+                /*libreria=[{titulo: "Don QUijote", autores: "Cervantes"},
+                    {titulo:"La Celestina", autores: "Fde de Rojas, Pepe Perez"}]*/
+
+                var fila=document.createElement("tr");
+                var celda_titulo=document.createElement("td");
+                var celda_autores=document.createElement("td");
+                celda_titulo.innerHTML=lista_obj_libro[i].titulo;
+                celda_autores.innerHTML=lista_obj_libro[i].autores;
+                var obj_libro=lista_obj_libro[i];
+                fila.appendChild(celda_titulo);
+                fila.appendChild(celda_autores);
+                tabla.appendChild(fila);       
+            }
+            document.getElementById("contenedor_libreria").appendChild(tabla);
+
+       }
+
+    </script>
+</head>
+<body onload="cargarLibros();">
+<div id="contenedor_libreria"></div>
+
+
+</body>
+</html>
+
