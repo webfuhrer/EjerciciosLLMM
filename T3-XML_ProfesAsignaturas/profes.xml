@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<profesores>
+	<profesor>
+		<nombre>Pepe</nombre>
+		<asignatura>Física</asignatura>
+		<asignatura>Matemáticas</asignatura>
+	</profesor>
+	<profesor>
+		<nombre>Maria Luisa</nombre>
+		<asignatura>Música</asignatura>
+	</profesor>
+	<profesor>
+		<nombre>Pelanas</nombre>
+		<asignatura>Física</asignatura>
+		<asignatura>Mates</asignatura>
+	</profesor>
+</profesores>

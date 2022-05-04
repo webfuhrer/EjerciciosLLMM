@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function cargarProfesores()
+        {
+            var obj_peticion=new XMLHttpRequest();
+            obj_peticion.open("GET", "profes.xml");
+            obj_peticion.send();
+            obj_peticion.onreadystatechange=function()
+            {
+                if(obj_peticion.readyState==4 && obj_peticion.status==200)
+                {
+                     extraerProfesores(obj_peticion.responseXML);   
+                }
+            }
+        }
+        function extraerProfesores(obj_XML)
+            {
+            var lista_obj_profesores=obj_XML.getElementsByTagName("profesor");
+            var profesores=new Array();
+            for(i=0; i<lista_obj_profesores.length; i++)
+                {
+                    profesores[i]=new Object();
+                    var obj_profesor=lista_obj_profesores[i];
+                    var obj_nombre=obj_profesor.getElementsByTagName("nombre")[0];
+                    var nombre_profe=obj_nombre.childNodes[0].nodeValue;
+                    var lista_obj_asignatura=obj_profesor.getElementsByTagName("asignatura");
+                    console.log("Nombre profe: "+nombre_profe);
+                    profesores[i].nombre=nombre_profe;
+                   profesores[i].asignaturas=[];
+
+                    for(j=0; j<lista_obj_asignatura.length; j++)
+                    {
+                         
+                        var obj_asignatura=lista_obj_asignatura[j];
+                        var asignatura=obj_asignatura.childNodes[0].nodeValue;
+                         profesores[i].asignaturas[j]=asignatura;
+                        console.log("Asignatura: "+asignatura);
+                    }
+                }
+                pintarLista(profesores);
+
+            }
+            function pintarLista(profesores)
+            {
+                for (i=0; i<profesores.length; i++)
+                {
+                    var obj_parrafo=document.createElement("p");
+                    var obj_ul=document.createElement("ul");
+                    var nombre_profe=profesores[i].nombre; 
+                    obj_parrafo.innerHTML=nombre_profe;
+                    var lista_asignaturas=profesores[i].asignaturas;
+                    for(j=0; j<lista_asignaturas.length; j++)
+                    {
+                        var li_elemento=document.createElement("li");
+                        li_elemento.innerHTML=lista_asignaturas[j];
+                        obj_ul.appendChild(li_elemento);
+
+                    }
+                    document.getElementById("contenedor_profesores").appendChild(obj_parrafo);
+                     document.getElementById("contenedor_profesores").appendChild(obj_ul);
+                }
+            }
+
+
+    </script>
+</head>
+<body onload="cargarProfesores();">
+<div id="contenedor_profesores"></div>
+
+
+</body>
+</html>
+
