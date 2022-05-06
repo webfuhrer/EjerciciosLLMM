@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function cargarProfesores()
+        {
+            var obj_peticion=new XMLHttpRequest();
+            obj_peticion.open("GET", "http://api.open-notify.org/iss-now.json");
+            obj_peticion.send();
+            obj_peticion.onreadystatechange=function()
+            {
+                if(obj_peticion.readyState==4 && obj_peticion.status==200)
+                {
+                    var objeto_json=JSON.parse(obj_peticion.responseText);
+                    var p_latitud=document.createElement("p");
+                    var p_longitud=document.createElement("p");
+                    p_latitud.innerHTML=objeto_json.iss_position.latitude;
+
+                    p_longitud.innerHTML=objeto_json.iss_position.longitude;
+                    document.getElementById("contenedor_posicion").innerHTML="";
+                    document.getElementById("contenedor_posicion").appendChild(p_latitud);
+                    document.getElementById("contenedor_posicion").appendChild(p_longitud);
+                  }
+            }
+        }
+        function mostrarReloj()
+        {
+            var fecha=new Date();
+            var fecha_actual=fecha.now;
+            document.getElementById("contenedor_posicion").innerHTML=Date.now();
+        }
+       
+    </script>
+</head>
+<body onload="setInterval(mostrarReloj, 1000);;">
+<div id="contenedor_posicion"></div>
+
+
+</body>
+</html>
+
