@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function cargarAgenda()
+        {
+            var xhr=new XMLHttpRequest();
+            //readyState
+            //status
+            //responseText
+            xhr.onreadystatechange=function()
+                {
+                    if(xhr.readyState==4 && xhr.status==200)
+                    {
+                        //Ya tengo los datos
+                        var txt_json=xhr.responseText;
+                        var obj_json=JSON.parse(txt_json);
+                       alert(obj_json[1].nombre);
+
+                    }   
+
+                }
+            xhr.open("GET", "claustro.json");
+            xhr.send();
+
+        }
+
+
+            
+
+    </script>
+</head>
+<body onload="cargarAgenda();">
+<div id="contenedor_libreria"></div>
+
+
+</body>
+</html>
