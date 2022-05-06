@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function cargarAgenda()
+        {
+            var xhr=new XMLHttpRequest();
+            //readyState
+            //status
+            //responseText
+            xhr.onreadystatechange=function()
+                {
+                    if(xhr.readyState==4 && xhr.status==200)
+                    {
+                        //Ya tengo los datos
+                        var obj_xml=xhr.responseXML;
+                        tratarXML(obj_xml);
+
+                    }   
+
+                }
+            xhr.open("GET", "lista_profes.xml");
+            xhr.send();
+
+        }
+        function tratarXML(xml)
+        {
+            var lista_profes=xml.getElementsByTagName("profesor");
+            for(i=0; i<lista_profes.length; i++)
+            {
+                var txt_nombre=lista_profes[i].getElementsByTagName("nombre")[0].childNodes[0].nodeValue;
+                var lista_asignaturas=lista_profes[i].getElementsByTagName("asignatura");
+                var txt="";
+                for(j=0; j<lista_asignaturas.length; j++)
+                    {
+                        var txt_asignatura=lista_asignaturas[j].childNodes[0].nodeValue;
+                        txt=txt+", "+txt_asignatura;
+
+                    }
+                console.log("NOMBRE: "+txt_nombre+" ASIGNATURAS: "+txt);
+            }
+
+            
+        }
+
+    </script>
+</head>
+<body onload="cargarAgenda();">
+<div id="contenedor_libreria"></div>
+
+
+</body>
+</html>

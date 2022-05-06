@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function cargarAgenda()
+        {
+            var xhr=new XMLHttpRequest();
+            //readyState
+            //status
+            //responseText
+            xhr.onreadystatechange=function()
+                {
+                    if(xhr.readyState==4 && xhr.status==200)
+                    {
+                        //Ya tengo los datos
+                        var obj_xml=xhr.responseXML;
+                        tratarXML(obj_xml);
+
+                    }   
+
+                }
+            xhr.open("GET", "agenda.xml");
+            xhr.send();
+
+        }
+        function tratarXML(xml)
+        {
+            var lista_nombres=xml.getElementsByTagName("nombre");
+            var lista_telefonos=xml.getElementsByTagName("telefono");
+            for(i=0; i<lista_nombres.length; i++)
+            {
+        var txt_nombre=lista_nombres[i].childNodes[0].nodeValue;
+        var txt_telefono=lista_telefonos[i].childNodes[0].nodeValue;
+        console.log("nombre: "+txt_nombre+" Tlf: "+txt_telefono);
+            }
+            
+        }
+
+    </script>
+</head>
+<body onload="cargarAgenda();">
+<div id="contenedor_libreria"></div>
+
+
+</body>
+</html>

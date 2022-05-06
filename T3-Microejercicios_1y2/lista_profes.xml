@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<claustro>
+  <profesor>
+      <nombre>Pepe</nombre>
+      <asignatura>Mates</asignatura>
+  </profesor>
+  <profesor>
+      <nombre>Avelina</nombre>
+      <asignatura>Redes</asignatura>
+      <asignatura>BBDD</asignatura>
+  </profesor>
+  <profesor>
+  </profesor>
+</claustro>
+

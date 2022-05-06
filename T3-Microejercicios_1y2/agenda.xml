@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<agenda>
+  <contacto>
+  <nombre>Pepe</nombre>
+  <telefono>94656532</telefono>
+  </contacto>
+<contacto>
+  <nombre>Ana</nombre>
+  <telefono>6559865</telefono>
+</contacto>
+</agenda>
+
