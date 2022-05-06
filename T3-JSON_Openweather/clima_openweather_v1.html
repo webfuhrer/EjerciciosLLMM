@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function hacerPeticion()
+        {
+            var ruta=document.getElementById("combo_ciudades").value;
+            var obj_peticion=new XMLHttpRequest();
+            obj_peticion.open("GET", ruta);
+            obj_peticion.send();
+            obj_peticion.onreadystatechange=function()
+            {
+                if(obj_peticion.readyState==4 && obj_peticion.status==200)
+                {
+                    var obj_json=JSON.parse(obj_peticion.responseText);
+                    var temp_min=obj_json.main.temp_min-273;
+                    var temp_max=obj_json.main.temp_max-273;
+                    var p_t_min=document.createElement("p");
+                    var p_t_max=document.createElement("p");
+                    p_t_min.innerHTML="Mínima: "+temp_min+"ºC";
+                    p_t_max.innerHTML="Máxima: "+temp_max+"ºC";
+                    document.getElementById("contenedor_clima").innerHTML="";
+                    document.getElementById("contenedor_clima").appendChild(p_t_min);
+                    document.getElementById("contenedor_clima").appendChild(p_t_max);
+                }
+            }
+        }
+      
+       
+    </script>
+</head>
+<body >
+
+<select id="combo_ciudades">
+    <option value="http://api.openweathermap.org/data/2.5/weather?q=Madrid&appid=57703a7a9ab7b873a99116a3ea379748">Madrid</option>
+    <option value="http://api.openweathermap.org/data/2.5/weather?q=Barcelona&appid=57703a7a9ab7b873a99116a3ea379748">Barcelona</option>
+    <option value="http://api.openweathermap.org/data/2.5/weather?q=Sevilla&appid=57703a7a9ab7b873a99116a3ea379748">Sevilla</option>
+</select>
+<input type="button" onclick="hacerPeticion();" value="Ver clima">
+<div id="contenedor_clima"></div>
+</body>
+</html>
+
