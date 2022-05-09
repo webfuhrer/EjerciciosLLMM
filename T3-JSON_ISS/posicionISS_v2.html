@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function cargarPosicion()
+        {
+            var xhr=new XMLHttpRequest();
+            //readyState
+            //status
+            //responseText
+            //responseXML
+            xhr.onreadystatechange=function()
+                {
+                    if(xhr.readyState==4 && xhr.status==200)
+                    {
+                       var obj_json= JSON.parse(xhr.responseText);
+                       var longitud=obj_json.iss_position.longitude;
+                        var latitud=obj_json.iss_position.latitude;
+                       //alert(longitud+", "+latitud);
+                       /*Opción 1: Pintar aquí mismo:
+                       var p_latitud=document.createElement("p");
+                       var p_longitud=document.createElement("p");
+                p_latitud.innerHTML="LATITUD: "+latitud;
+                p_longitud.innerHTML="LONGITUD: "+longitud;
+                document.getElementById("contenedor_posicion").appendChild(p_latitud);
+                document.getElementById("contenedor_posicion").appendChild(p_longitud);*/
+                /*Opción 2: Pasarle la latitud y longitud a una función para que lo pinte ella
+                pintarParrafos(latitud, longitud);*/
+
+                /*Opción 3: Crear un objeto Javascript con latitud y longitud y pasárselo a una función para que lo pinte*/
+                var objeto_posicion=new Object();
+                objeto_posicion.latitud=latitud;
+                objeto_posicion.longitud=longitud;
+                pintarParrafosConObjeto(objeto_posicion);
+                    }   
+
+                }
+            xhr.open("GET", "http://api.open-notify.org/iss-now.json");
+            xhr.send();
+
+        }
+        /*Función creada para la opción 3*/
+        function pintarParrafosConObjeto(objeto_punto)
+        {
+            var p_latitud=document.createElement("p");
+            var p_longitud=document.createElement("p");
+            p_latitud.innerHTML=objeto_punto.latitud;
+            p_longitud.innerHTML=objeto_punto.longitud;
+            document.getElementById("contenedor_posicion").appendChild(p_latitud);
+            document.getElementById("contenedor_posicion").appendChild(p_longitud);
+        }
+        /*Función creada para la opción 2
+        function pintarParrafos(lat, lng)
+        {
+            var p_latitud=document.createElement("p");
+            var p_longitud=document.createElement("p");
+            p_latitud.innerHTML=lat;
+            p_longitud.innerHTML=lng;
+            document.getElementById("contenedor_posicion").appendChild(p_latitud);
+            document.getElementById("contenedor_posicion").appendChild(p_longitud);
+        }
+*/
+            
+
+    </script>
+</head>
+<body onload="cargarPosicion();">
+<div id="contenedor_posicion"></div>
+
+
+</body>
+</html>
