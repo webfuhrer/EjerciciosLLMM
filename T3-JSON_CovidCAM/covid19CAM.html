@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function cargarPosicion()
+        {
+            var xhr=new XMLHttpRequest();
+            //readyState
+            //status
+            //responseText
+            //responseXML
+            xhr.onreadystatechange=function()
+                {
+                    if(xhr.readyState==4 && xhr.status==200)
+                    {
+                  var obj_json=JSON.parse(xhr.responseText);
+                  var lista_zonas=obj_json.data;
+                  //Objeto de Javascript:
+                  var obj_lista_zonas=[];
+                  for (i=0; i<lista_zonas.length; i++)
+                  {
+                    obj_lista_zonas[i]=new Object();
+                    obj_lista_zonas[i].zona=obj_json.data[i].zona_basica_salud;
+                    obj_lista_zonas[i].casos=obj_json.data[i].casos_confirmados_P60mas_ultimos_14dias;
+                  }
+                  pintarTabla(obj_lista_zonas);
+                  //alert(obj_json.data[0].zona_basica_salud);
+                  }    
+
+                }
+            xhr.open("GET", "https://run.mocky.io/v3/acf92647-4f3a-49f7-88ca-7bad01279883");
+            xhr.send();
+
+        }
+        function pintarTabla(obj_lista_zonas)
+        {
+            var tabla=document.createElement("table");
+            for(i=0; i<obj_lista_zonas.length; i++)
+            {
+                var fila=document.createElement("tr");
+                var celda_zona=document.createElement("td");
+                var celda_casos=document.createElement("td");
+                celda_zona.innerHTML=obj_lista_zonas[i].zona;
+                celda_casos.innerHTML=obj_lista_zonas[i].casos;
+                fila.appendChild(celda_zona);
+                fila.appendChild(celda_casos);
+                tabla.appendChild(fila);
+            }
+            document.getElementById("contenedor_posicion").appendChild(tabla) 
+        }
+            
+
+    </script>
+        
+</head>
+<body onload="cargarPosicion();">
+<div id="contenedor_posicion"></div>
+
+
+</body>
+</html>
