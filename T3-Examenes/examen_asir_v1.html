@@ -1,0 +1,68 @@
+<!--4-Continua con el 2 y con los datos extraidos crea una lista (creando un objeto de Javascript): una p y los ul-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ejercicio2</title>
+    <script>
+        function cargar(){
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if (this.status == 200 && this.readyState == 4) {
+                     var txt_json=xhr.responseText;
+                     var obj_json=JSON.parse(txt_json);
+                     crearObjetoJavascript(obj_json);
+                }
+            }
+            xhr.open("GET","https://run.mocky.io/v3/384b3d21-141e-4f6a-9f80-61ce6a2aab1f");
+            xhr.send();
+        }
+        function crearObjetoJavascript(objeto_json)
+        {
+            var lista_viajes=[];
+            for(i=0; i<objeto_json.length; i++)
+            {
+                lista_viajes[i]=new Object();
+                var nombre=objeto_json[i].diputado_nombre;
+                var apellido1=objeto_json[i].diputado_apellido1;
+                var apellido2=objeto_json[i].diputado_apellido2;
+                lista_viajes[i].nombre=nombre+" "+apellido1+" "+apellido2;
+                var coste=objeto_json[i].coste;
+                lista_viajes[i].coste=coste;
+
+            }
+            console.log(lista_viajes);
+            pintarTabla(lista_viajes);
+        }
+        function pintarTabla(lista_viajes)
+        {   var coste_total=0;
+            var tabla=document.createElement("table");
+            for(i=0; i<lista_viajes.length; i++)
+            {
+                var fila=document.createElement("tr");
+                var columna_nombre=document.createElement("td");
+                var columna_coste=document.createElement("td");
+                columna_nombre.innerHTML=lista_viajes[i].nombre;
+                columna_coste.innerHTML=lista_viajes[i].coste;
+                coste_total=coste_total+lista_viajes[i].coste;
+                tabla.appendChild(fila);
+                fila.appendChild(columna_nombre);
+                fila.appendChild(columna_coste);
+
+
+            }  
+            var parrafo=document.createElement("p");
+            var num_viajes=lista_viajes.length;
+            parrafo.innerHTML="Se han realizado "+num_viajes+" con un coste total de "+Math.round(coste_total*100)/100+"€";
+            document.getElementById("cargar").appendChild(parrafo);
+            document.getElementById("cargar").appendChild(tabla);
+        }
+        
+    </script>
+</head>
+<body onload = "cargar()">
+    <div id="cargar"></div>
+</body>
+</html>

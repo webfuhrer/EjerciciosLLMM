@@ -1,0 +1,69 @@
+<!--4-Continua con el 2 y con los datos extraidos crea una lista (creando un objeto de Javascript): una p y los ul-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ejercicio2</title>
+    <script>
+        function cargar(){
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if (this.status == 200 && this.readyState == 4) {
+                     var txt_json_original=xhr.responseText;
+                     var txt_json_sinarroba=txt_json_original.replace("@graph", "graph");
+                     var txt_json_sin_guion=txt_json_sinarroba.replaceAll("street-address", "streetaddress");
+                   //  console.log(txt_json_sin_guion);
+                     var obj_json=JSON.parse(txt_json_sin_guion);
+                     crearObjetoJavascript(obj_json);
+                     
+                }
+            }
+            xhr.open("GET","https://run.mocky.io/v3/4d72fb15-e674-47d3-99fb-e4a4d10e116e");
+            xhr.send();
+        }
+        function crearObjetoJavascript(objeto_json)
+        {
+            var lista_bibliotecas=objeto_json.graph;
+            var obj_lista_bibliotecas=new Array();
+            for (i=0; i<lista_bibliotecas.length; i++)
+            {
+                var title=lista_bibliotecas[i].title;
+                var street=lista_bibliotecas[i].address.streetaddress;
+                obj_lista_bibliotecas[i]=new Object();
+                 obj_lista_bibliotecas[i].title=title;
+                 obj_lista_bibliotecas[i].calle=street;
+                 
+                //console.log(title+" "+street);
+            }
+            pintarTabla(obj_lista_bibliotecas); 
+        }
+        function pintarTabla(lista_bibliotecas)
+        {
+            var tabla=document.createElement("table");
+
+            for(i=0; i<lista_bibliotecas.length; i++)
+            {
+                var fila=document.createElement("tr");
+                var columna_nombre=document.createElement("td");
+                var columna_calle=document.createElement("td");
+                 columna_nombre.innerHTML=lista_bibliotecas[i].title;
+                 columna_calle.innerHTML=lista_bibliotecas[i].calle;
+                fila.appendChild(columna_nombre);
+                fila.appendChild(columna_calle);
+                tabla.appendChild(fila);
+                   
+            }
+            //lista_bibliotecas.length;
+            var parrafo=document.createElement("p");
+            parrafo.innerHTML="Hay "+lista_bibliotecas.length+" bibliotecas";
+            document.getElementById("cargar").appendChild(parrafo);
+            document.getElementById("cargar").appendChild(tabla);
+        }        
+    </script>
+</head>
+<body onload = "cargar()">
+    <div id="cargar"></div>
+</body>
+</html>
