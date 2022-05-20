@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <script>
+       function Datos_gasolinera() {
+       var xhr = new XMLHttpRequest();
+       xhr.onreadystatechange = function(){
+           if (xhr.status == 200 && xhr.readyState == 4) {
+                   var obj_json = JSON.parse(xhr.responseText); 
+                   console.log(obj_json); 
+                   var lista_json = [];
+                   for (let i = 0; i < obj_json.ListaEESSPrecio.length; i++) {
+                       lista_json[i] = new Object();
+                       var  direccion=obj_json.ListaEESSPrecio[i].Direccion;
+                       var  municipio= obj_json.ListaEESSPrecio[i].Municipio;
+                       var  provincia= obj_json.ListaEESSPrecio[i].Provincia;
+                       var  precioGaso= obj_json.ListaEESSPrecio[i].PrecioGasolina95E5;
+                       console.log(direccion + municipio + provincia + precioGaso);
+					   
+					     pintarTablaObjetoScript(obj_json);
+					  //pintarTabla(obj_json);
+					  
+                       lista_json[i].dire= direccion ;
+                       lista_json[i].muni= municipio;
+                       lista_json[i].provi= provincia;
+                       lista_json[i].precioGaso= precioGaso ;
+					   }
+
+                       console.log (lista_json);
+                       pintarTablaObjetoScript(lista_json);
+                   }
+                   
+                }
+                xhr.open("GET","json_gasolineras.json");
+                xhr.send();
+       }
+	   
+	   function pintarTablaObjetoScript(lista){
+       var tabla = document.createElement("table");
+      
+       for (let i = 0; i < lista.length; i++) {
+           var fila = document.createElement("tr");
+           var celdas_dire = document.createElement("td");
+           var celdas_muni = document.createElement("td");
+		   var celdas_provi = document.createElement("td");
+		   var celdas_precioGaso = document.createElement("td");
+           celdas_dire.innerHTML = lista[i].dire ;
+		   celdas_muni.innerHTML = lista[i].muni ;
+		   celdas_provi.innerHTML = lista[i].provi ;
+           celdas_precioGaso.innerHTML = lista[i].precioGaso;
+           fila.appendChild(celdas_dire);
+           fila.appendChild(celdas_muni);
+		   fila.appendChild(celdas_provi);
+			fila.appendChild(celdas_precioGaso);
+           tabla.appendChild(fila);
+       }
+       document.getElementById("contenedor_tabla").appendChild(tabla);
+ 
+	   }
+	   
+	   
+
+
+    </script>
+</head>
+<body  onload="Datos_gasolinera()">
+    <div id="contenedor_tabla"></div>
+</body>
+</html>

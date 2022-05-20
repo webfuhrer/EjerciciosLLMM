@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function efuncion(){
+        var xhr=new XMLHttpRequest();
+        xhr.open("GET","json_gasolineras.json");
+        xhr.send();
+        xhr.onreadystatechange=function(){
+        if (xhr.readyState==4 && xhr.status==200){
+            var obj_parse=xhr.responseText;
+            var obj_xml = JSON.parse(obj_parse);
+            console.log(obj_xml);
+            var lista=[];
+            for (let i = 0; i < obj_xml.ListaEESSPrecio.length; i++) {
+                lista[i]=new Object();
+                lista[i].Direccion=obj_xml.ListaEESSPrecio[i].Direccion;
+                lista[i].Municipio=obj_xml.ListaEESSPrecio[i].Municipio;
+                lista[i].Provincia=obj_xml.ListaEESSPrecio[i].Provincia;
+                lista[i].PrecioGasolina95=obj_xml.ListaEESSPrecio[i].PrecioGasolina95E5;
+                var Direccion =lista[i].Direccion;
+                var Municipio =lista[i].Municipio;
+                var Provincia =lista[i].Provincia;
+                var PrecioGasolina95 =lista[i].PrecioGasolina95;
+            }
+            console.log(lista);
+            pintartabla(lista);
+        }
+    }
+}
+function pintartabla(lista) {
+    var tabla_todo = document.createElement("table");
+
+    for (let i = 0; i < lista.length; i++) {
+        var fila = document.createElement("tr");
+        var columna_nombre = document.createElement("td");
+
+
+        columna_nombre.innerHTML=lista[i].Direccion + " " + lista[i].Municipio + " " + lista[i].Provincia + " " + lista[i].PrecioGasolina95;
+
+        fila.appendChild(columna_nombre);
+        tabla_todo.appendChild(fila);
+    }
+    document.getElementsByTagName("div")[0].appendChild(tabla_todo);
+}
+    </script>
+</head>
+<body onload="efuncion()">
+    <div></div>
+</body>
+</html>

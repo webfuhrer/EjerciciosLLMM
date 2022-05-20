@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content = "IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>ExamenT3</title>
+    <script>
+        function cargar_examen(){
+            var xhr=new XMLHttpRequest();
+            xhr.open("GET","json_gasolineras.json");
+            xhr.send();
+            xhr.onreadystatechange=function(){
+                if(xhr.status==200&&xhr.readyState==4){ 
+                var obj_json=JSON.parse(xhr.responseText);
+                var lista_json=[];
+                for(let i=0;i<obj_json.ListaEESSPrecio.length;i++){
+                    lista_json[i]=new Object();
+                    var direccion=obj_json.ListaEESSPrecio[i].Direccion;
+                    var municipio=obj_json.ListaEESSPrecio[i].Municipio;
+                    var provincia=obj_json.ListaEESSPrecio[i].Provincia;
+                    var PrecioGasolina95=obj_json.ListaEESSPrecio[i].PrecioGasolina95E5;
+                    console.log(direccion+municipio+provincia+PrecioGasolina95);
+                    lista_json[i].dir=direccion;
+                    lista_json[i].mun=municipio;
+                    lista_json[i].pro=provincia;
+                    lista_json[i].Pre=PrecioGasolina95;
+                }
+                console.log(lista_json);
+                PintarTablaObjetos(lista_json);
+        }
+                }
+            }
+
+            
+
+
+           
+
+
+
+
+function PintarTablaObjetos(lista){
+            var tabla=document.createElement("table");
+
+            for(let i=0;i<lista.length;i++){
+                var fila=document.createElement("tr");
+                var celdas_direccion=document.createElement("td");
+                var celdas_municipio=document.createElement("td");
+                var celdas_provincia=document.createElement("td");
+                var celdas_PrecioGasolina95=document.createElement("td");
+                celdas_direccion.innerHTMl=lista[i].dir;
+                celdas_municipio.innerHTML=lista[i].mun;
+                celdas_provincia.innerHTML=lista[i].pro;
+                celdas_PrecioGasolina95.innerHTML=lista[i].Pre;
+                fila.appendChild(celdas_direccion);
+                fila.appendChild(celdas_municipio);
+                fila.appendChild(celdas_provincia);
+                fila.appendChild(celdas_PrecioGasolina95);
+                tabla.appendChild(fila);
+            }
+            document.getElementById("contenedor_tabla").appendChild(tabla);
+            }
+       
+
+
+    </script>
+</head>
+<body onload="cargar_examen()">
+    Hola
+    <div id="contenedor_tabla"></div>
+    </body>
+</html>

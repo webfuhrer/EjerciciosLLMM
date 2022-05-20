@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>examen Ana</title>
+</head>
+<script>
+ function CargarExamen(){
+  var xhr=new XMLHttpRequest();
+  xhr.open("GET","json_gasolineras.json");
+     xhr.send();
+  xhr.onreadystatechange=function (){
+     if (xhr.status=200 && xhr.readyState == 4){
+        var obj_json= JSON.parse(xhr.responseText);
+        var lista_eess=obj_json.ListaEESSPrecio;
+        var lista_gasolineras=new Array();
+        for(i=0; i< lista_eess.length; i++)
+        {
+          lista_gasolineras[i]=new Object();
+          var direccion=lista_eess[i].Direccion;
+          var municipio=lista_eess[i].Municipio;
+          var precio=lista_eess[i].PrecioGasolina95E5; 
+          lista_gasolineras[i].direccion=direccion;   
+          lista_gasolineras[i].municipio=municipio; 
+          lista_gasolineras[i].precio=precio;  
+
+          console.log(lista_eess[i].Direccion+" "+lista_eess[i].Municipio+" "+lista_eess[i].PrecioGasolina95E5);
+        }
+        pintartabla(lista_gasolineras);
+        console.log (obj_json);
+        console.log( lista_gasolineras);
+     }
+     
+
+  }
+
+ }
+
+    
+  function pintartabla(lista){
+    var tabla=document.createElement("table");
+    
+    
+    for (i=0 ; i<lista.length; i++){
+   var fila=document.createElement("tr");
+   var celda_nombre=document.createElement("td");
+   var celda_value=document.createElement("td");
+   celda_nombre.innerHTML=lista[i].direccion;
+   celda_value.innerHTML=lista[i].municipio;
+   fila.appendChild(celda_nombre);
+   fila.appendChild(celda_value);
+   tabla.appendChild(fila);
+
+    }
+    document.getElementById("contenido_tabla").appendChild(tabla);
+  }
+
+  
+  
+
+
+
+
+</script>
+<body onload="CargarExamen()">
+    <div id="contenido_tabla"><div>
+</body>
+</html>
