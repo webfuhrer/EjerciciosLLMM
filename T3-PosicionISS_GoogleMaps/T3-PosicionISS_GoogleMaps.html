@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2nnTwxI_6v6FgZQ_HYALbkWsL3qhFjT4"></script>
+     <script>
+        var mapa_iss=new Object();
+        var marker=new Object();
+        function pedirDatosISS()
+        {
+            var xhr=new XMLHttpRequest();
+            xhr.open("GET", "http://api.open-notify.org/iss-now.json");
+            xhr.send();
+            xhr.onreadystatechange=function()
+            {
+                if(xhr.readyState==4 && xhr.status==200)
+                {
+                    var obj_json=JSON.parse(xhr.responseText);
+                    var lat=obj_json.iss_position.latitude;
+                    var long=obj_json.iss_position.longitude;
+                    mostrarMapa(lat*1, long*1);
+                }
+
+            }
+        }
+
+        function mostrarMapa(latitud, longitud) {
+  // The location of Uluru
+  //40.31255369148476, -3.852578029185855
+    var posicion_iss={lat:latitud,lng:longitud }
+  // The map, centered at Uluru
+  var contenido_div=document.getElementById("map").innerHTML;
+  if (contenido_div==""){
+
+          mapa_iss = new google.maps.Map(document.getElementById("map"), {
+            zoom: 4,
+            mapTypeId: 'satellite',
+            center: posicion_iss,
+          });
+          marker = new google.maps.Marker({
+            position: posicion_iss,
+            map: mapa_iss,
+            title:'Aqui está el instituto'
+          });
+
+
+}
+else
+{
+    //El marker ya existe, le cambiamos la posición
+    marker.setPosition(posicion_iss);
+    mapa_iss.setCenter(posicion_iss);
+}
+   
+
+}
+     </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pruebas mapa</title>
+    <style>
+    #map
+    {
+        width:500px;
+        height:500px;
+    }
+</style>
+</head>
+<body onload="setInterval( pedirDatosISS, 1000)">
+    <div id="map"></div>
+
+</body>
+</html>
