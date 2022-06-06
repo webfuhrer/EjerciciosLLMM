@@ -1,0 +1,8 @@
+{
+"amigos":[
+	{"nombre": "Ana", "telefono":"65636655"},
+	{"nombre": "Pepe", "telefono":"878786544"},
+	{"nombre": "Luis", "telefono":"78787933"},
+	{"nombre": "Juanma", "telefono":"456475"}
+]
+}

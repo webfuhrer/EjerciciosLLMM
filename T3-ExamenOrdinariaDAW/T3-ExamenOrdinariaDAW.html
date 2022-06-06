@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    @media print
+    {
+        #contenedor_desplegable{
+            display:  none;
+        }
+    }
+    </style>
+    <script>
+      function cargarJSON()
+      {
+        var xhr=new XMLHttpRequest();
+        xhr.open("GET", "amigos.json");
+        xhr.send();
+        xhr.onreadystatechange=function()
+            {
+                if(xhr.readyState==4 && xhr.status==200)
+                {
+                   alert(xhr.responseText); 
+                   //No existe un responseJSON
+                   var obj_json=JSON.parse(xhr.responseText);
+                   var lista_amigos=obj_json.amigos;
+                   var objeto_lista_amigos=new Array();
+                   for(i=0; i<lista_amigos.length; i++)
+                   {
+                    objeto_lista_amigos[i]=new Object();
+
+                    var nombre=lista_amigos[i].nombre;
+                    var tlf=lista_amigos[i].telefono;
+                    console.log("NOMBRE: "+nombre+" TELEFONO:"+tlf);
+                objeto_lista_amigos[i].nombre=nombre;
+                objeto_lista_amigos[i].telefono=tlf;
+                   }
+                   crearDesplegable(objeto_lista_amigos);
+                }
+                //
+            }
+
+      }
+function crearDesplegable(objeto_lista_amigos)
+{
+    var objeto_select=document.createElement("select");
+    objeto_select.onchange=function()
+        {
+            cambioDesplegable(this.value, objeto_lista_amigos);
+        }
+    for(indice_amigo=0; indice_amigo<objeto_lista_amigos.length; indice_amigo++)
+    {
+        var elemento_option=document.createElement("option");
+        elemento_option.value=indice_amigo;
+        elemento_option.innerHTML=objeto_lista_amigos[indice_amigo].nombre;
+        objeto_select.appendChild(elemento_option);
+    }
+document.getElementById("contenedor_desplegable").appendChild(objeto_select);
+}
+function cambioDesplegable(indice_seleccionado, lista_amigos)
+    {
+        console.log("Seleccionado el indice "+indice_seleccionado+" y el objeto amigo es "+lista_amigos[indice_seleccionado].nombre+", "+
+            lista_amigos[indice_seleccionado].telefono);
+        var elemento_parrafo=document.createElement("p");
+        elemento_parrafo.innerHTML="El teléfono de "+lista_amigos[indice_seleccionado].nombre+" es "+lista_amigos[indice_seleccionado].telefono;
+        document.getElementById("contenedor_parrafo").innerHTML="";
+        document.getElementById("contenedor_parrafo").appendChild(elemento_parrafo);
+    }
+
+    </script>
+</head>
+<body onload="cargarJSON()">
+    <div id="contenedor_desplegable"></div>
+    <div id="contenedor_parrafo"></div>
+</body>
+</html>
